@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="./vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Stack</title>
+  <script type="module" src="./src/main.js"></script>
+  <script src="./src/main_extend.js"></script>
+</head>
+
+<body class="relative" style="background-image: url(./background/cyberpunk.jpg)">
+  <section class="container mx-auto p-12 relative z-10">
+    <div class="logo text-center">
+      <div class="inline-flex items-center justify-center gap-4 bg-[#fedd49] px-2.5 py-2 rounded-lg">
+        <img src="./logo.svg" class="ionicon" />
+        <h1 class="text-4xl font-bold">Campus Full Stack</h1>
+      </div>
+    </div>
+
+    <!-- Button modal -->
+
+    <section class="flex justify-between items-center gap-3 py-6">
+      <button id="open-modal" role="button" aria-label="open modal"
+        class="flex items-center justify-center w-1/2 px-5 py-2 tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600">
+        <img src="./plus.svg" alt="Add user" class="w-5 h-5 invert" />
+        <span>Añadir alumno</span>
+      </button>
+      <form id="search" class="relative flex items-center">
+        <span class="absolute">
+          <img src="./search.svg" alt="Search" class="w-5 h-5 mx-3" />
+        </span>
+
+        <input type="search" placeholder="Search"
+          class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
+      </form>
+    </section>
+
+    <!-- Table -->
+    <div class="overflow-y-hidden rounded-lg border border-gray-200 shadow-md">
+      <table id="table-container" class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+        <thead class="bg-black-50">
+          <tr id="tr"></tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 border-t border-gray-100"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <section id="modal" class="hidden fixed z-50 inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+    <div class="relative top-20 mx-auto p-5 border w-4/5 md:w-1/2 lg:w-[520px] shadow-lg rounded-lg bg-white">
+      <button id="close-modal" role="button" aria-label="close modal"
+        class="cursor-pointer absolute top-0 right-0 mt-4 mr-5">
+        <img src="./close.svg" alt="Close" class="w-5 h-5" />
+      </button>
+      <div>
+        <h3 class="text-lg text-center leading-6 font-medium text-gray-900">
+          Alta Alumno
+        </h3>
+        <div class="px-7 py-5" id="modal-container"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Button Second Modal -->
+  <section>
+    <div class="w-full flex justify-center py-12">
+      <button id="open-second-modal"
+        class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mx-auto transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-600 rounded text-white px-4 sm:px-8 py-2 text-xs sm:text-sm">
+        <h3 class="text-lg text-center leading-6 font-medium text-white-900">
+          Crear grupo
+        </h3>
+      </button>
+    </div>
+  </section>
+
+  <!-- Second Modal -->
+
+  <section id="second-modal" class="hidden fixed z-50 inset-0 bg-blue-400 bg-opacity-30 overflow-y-auto h-full w-full">
+    <div
+      class="relative top-20 mx-auto p-5 border w-4/5 md:w-1/2 lg:w-[520px] rounded-lg bg-gradient-to-r from-sky-400 to-indigo-500">
+      <button id="close-second-modal" role="button" aria-label="close-second-modal"
+        class="cursor-pointer absolute top-0 right-0 mt-4 mr-5">
+        <img src="./close.svg" alt="Close" class="w-5 h-5" />
+      </button>
+
+      <!-- Modal grupos-->
+      <form onsubmit="guardarInformacion()">
+        <div>
+          <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">GRUPOS</h1>
+          <div class="px-4" id="second-modal-container"></div>
+        </div>
+        <label for="alumnos" class="text-gray-800 text-sm font-bold leading-tight tracking-normal"> Alumno (a)
+        </label>
+        <div class="relative">
+          <select id="alumnos"
+            class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:border-blue-500 focus:ring">
+
+            <!-- Opciones del input Alumnos -->
+
+            <option value="Alumno1">Romina Loyda</option>
+            <option value="Alumno2">Alex Tlaxcala</option>
+            <option value="Alumno2">Luis Gómez</option>
+            <option value="Alumno2">Jovany Rafael</option>
+            <option value="Alumno2">Monserrat Loyda</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
+        </div>
+
+
+        <label for="grupo" class="text-gray-800 text-sm font-bold leading-tight tracking-normal"> Grupo
+        </label>
+        <div class="relative">
+          <select name="grupo"
+            class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:border-blue-500 focus:ring">
+
+            <!-- Opciones del input GRUPO -->
+
+            <option value="grupoA">Grupo 31-WEB-E</option>
+            <option value="grupoB">Grupo 21-WEB-E</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-start w-full py-5">
+          <button type="submit"
+            class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
+            onclick="guardarInformacion()" required>Save</button>
+          <button
+            class="focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
+            onclick="modalHandler()">Cancel</button>
+        </div>
+    </div>
+    </form>
+  </section>
+
+  <!--TABLE GRUPOS-->
+
+  <section class="grid min-h-4 place-items-center bg-gradient-to-r from-sky-500 to-indigo-500 p-16">
+    <div class="rounded-lg bg-emerald-50 p-4 text-sm text-left text-blue-800">
+      <table class="border-collapse" id="table">
+        <thead>
+          <tr>
+            <th class="w-40 min-w-[10rem] max-w-[10rem] leading-normal text-emerald-500">Grupo Asignado</th>
+            <th class="w-40 min-w-[10rem] max-w-[10rem] leading-normal text-emerald-500">Alumnos</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="h-12 align-middle">Grupo 31-WEB-E</td>
+            <td class="h-12 align-center">Romina Loyda</td>
+            </td>
+          </tr>
+          <tr>
+            <td>Grupo 21-WEB-E</td>
+            <td>Luis Gómez</td>
+            <td class="h-12 align-middle">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</body>
+
+</html>
